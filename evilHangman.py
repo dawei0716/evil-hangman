@@ -1,6 +1,7 @@
 #David Kim 2/17/19
 
 from collections import Counter 
+import random
 
 def main():
     file = open('dictionary.txt', 'r') 
@@ -14,7 +15,7 @@ def main():
         numGuesses = askNumGuesses()
         wordsRemaining = findWordsRemaining(listOfWords, targetWordLen)
         guessedList = list()
-        wordProgress = updateProgress(wordsRemaining[0], guessedList)
+        wordProgress = updateProgress(random.choice(wordsRemaining), guessedList)
         
         while(True):
             print("Used Letters: " + str(guessedList))
@@ -25,14 +26,14 @@ def main():
             guessedList.append(guess)
 
             wordsRemaining = updateWordsRemaining(guess, wordsRemaining)
-            wordProgress = updateProgress(wordsRemaining[0], guessedList)
+            wordProgress = updateProgress(random.choice(wordsRemaining), guessedList)
             print()
             if(guess not in wordProgress):
                 numGuesses -= 1
             if("-" not in wordProgress or numGuesses == 0):
                 break
         if(numGuesses == 0):
-            print(f'You lose!. The word was {wordsRemaining[0]}')
+            print(f'You lose!. The word was {random.choice(wordsRemaining)}')
         else:
             print(f'You Win! The word was {wordProgress}')
 
